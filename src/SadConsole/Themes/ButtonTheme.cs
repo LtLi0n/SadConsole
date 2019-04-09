@@ -1,8 +1,4 @@
-﻿#if XNA
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-#endif
-
+﻿using SadRogue.Primitives;
 using System;
 using System.Runtime.Serialization;
 using SadConsole.Controls;
@@ -300,7 +296,7 @@ namespace SadConsole.Themes
 
             // Redraw the control
             button.Surface.Fill(appearance.Foreground, appearance.Background,
-                appearance.Glyph, SpriteEffects.None);
+                appearance.Glyph, CellMirror.None);
 
             button.Surface.Print(0, middle, button.Text.Align(button.TextAlignment, button.Width), textColor);
                 
@@ -309,8 +305,8 @@ namespace SadConsole.Themes
 
             //SadConsole.Algorithms.Line(0, 0, button.Width - 1, 0, (x, y) => { return true; });
 
-            button.Surface.DrawLine(Point.Zero, new Point(button.Width - 1, 0), topleftcolor, appearance.Background);
-            button.Surface.DrawLine(Point.Zero, new Point(0, button.Surface.Height - 1), topleftcolor, appearance.Background);
+            button.Surface.DrawLine(new Point(0, 0), new Point(button.Width - 1, 0), topleftcolor, appearance.Background);
+            button.Surface.DrawLine(new Point(0, 0), new Point(0, button.Surface.Height - 1), topleftcolor, appearance.Background);
             button.Surface.DrawLine(new Point(button.Width - 1, 0), new Point(button.Width - 1, button.Surface.Height - 1), bottomrightcolor, appearance.Background);
             button.Surface.DrawLine(new Point(1, button.Surface.Height - 1), new Point(button.Width - 1, button.Surface.Height - 1), bottomrightcolor, appearance.Background);
 

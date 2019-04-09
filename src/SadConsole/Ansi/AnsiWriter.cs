@@ -1,12 +1,9 @@
-﻿#if XNA
-using Microsoft.Xna.Framework;
-#endif
-
-using SadConsole.Effects;
+﻿using SadConsole.Effects;
 using System;
 using System.Linq;
 using System.Text;
 using Console = SadConsole.ScrollingConsole;
+using SadRogue.Primitives;
 
 namespace SadConsole.Ansi
 {

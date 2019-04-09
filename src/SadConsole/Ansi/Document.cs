@@ -48,11 +48,11 @@ namespace SadConsole.Ansi
         /// <param name="file">The file to load.</param>
         public Document(string file)
         {
-            using (var stream = Microsoft.Xna.Framework.TitleContainer.OpenStream(file))
-                using (var reader = new BinaryReader(stream))
-                    AnsiBytes = reader.ReadBytes((int)stream.Length);
+            //using (var stream = Microsoft.Xna.Framework.TitleContainer.OpenStream(file))
+            //    using (var reader = new BinaryReader(stream))
+            //        AnsiBytes = reader.ReadBytes((int)stream.Length);
 
-            Stream = new MemoryStream(AnsiBytes);
+            //Stream = new MemoryStream(AnsiBytes);
         }
 
         /// <inheritdoc />

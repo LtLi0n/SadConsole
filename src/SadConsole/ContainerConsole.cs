@@ -1,9 +1,9 @@
-﻿namespace SadConsole
-{
-    using SadConsole.Input;
-    using System;
-    using System.Collections.Generic;
+﻿using SadConsole.Input;
+using System;
+using System.Collections.Generic;
 
+namespace SadConsole
+{
     /// <summary>
     /// A <see cref="Console"/> that only processes children and does not render anything.
     /// </summary>

@@ -1,8 +1,4 @@
-﻿#if XNA
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-#endif
-
+﻿using SadRogue.Primitives;
 using System;
 using System.Runtime.Serialization;
 
@@ -76,7 +72,7 @@ namespace SadConsole.Renderers
                 if (surface.Tint.A != 255)
                 {
                     if (surface.DefaultBackground.A != 0)
-                        Global.SpriteBatch.Draw(surface.Font.FontImage, new Rectangle(0, 0, surface.AbsoluteArea.Width, surface.AbsoluteArea.Height), surface.Font.GlyphRects[surface.Font.SolidGlyphIndex], surface.DefaultBackground, 0f, Vector2.Zero, SpriteEffects.None, 0.2f);
+                        Global.SpriteBatch.Draw(surface.Font.FontImage, new Rectangle(0, 0, surface.AbsoluteArea.Width, surface.AbsoluteArea.Height), surface.Font.GlyphRects[surface.Font.SolidGlyphIndex], surface.DefaultBackground, 0f, Vector2.Zero, CellMirror.None, 0.2f);
 
                     for (var i = 0; i < surface.RenderCells.Length; i++)
                     {
@@ -85,7 +81,7 @@ namespace SadConsole.Renderers
                         if (!cell.IsVisible) continue;
 
                         if (cell.Background != Color.Transparent && cell.Background != surface.DefaultBackground)
-                            Global.SpriteBatch.Draw(surface.Font.FontImage, surface.RenderRects[i], surface.Font.GlyphRects[surface.Font.SolidGlyphIndex], cell.Background, 0f, Vector2.Zero, SpriteEffects.None, 0.3f);
+                            Global.SpriteBatch.Draw(surface.Font.FontImage, surface.RenderRects[i], surface.Font.GlyphRects[surface.Font.SolidGlyphIndex], cell.Background, 0f, Vector2.Zero, CellMirror.None, 0.3f);
 
                         if (cell.Foreground != Color.Transparent)
                             Global.SpriteBatch.Draw(surface.Font.FontImage, surface.RenderRects[i], surface.Font.GlyphRects[cell.Glyph], cell.Foreground, 0f, Vector2.Zero, cell.Mirror, 0.4f);
@@ -107,7 +103,7 @@ namespace SadConsole.Renderers
                 BeforeRenderTintCallback?.Invoke(Global.SpriteBatch);
 
                 if (surface.Tint.A != 0)
-                    Global.SpriteBatch.Draw(surface.Font.FontImage, new Rectangle(0, 0, surface.AbsoluteArea.Width, surface.AbsoluteArea.Height), surface.Font.GlyphRects[surface.Font.SolidGlyphIndex], surface.Tint, 0f, Vector2.Zero, SpriteEffects.None, 0.5f);
+                    Global.SpriteBatch.Draw(surface.Font.FontImage, new Rectangle(0, 0, surface.AbsoluteArea.Width, surface.AbsoluteArea.Height), surface.Font.GlyphRects[surface.Font.SolidGlyphIndex], surface.Tint, 0f, Vector2.Zero, CellMirror.None, 0.5f);
             }
         }
     }

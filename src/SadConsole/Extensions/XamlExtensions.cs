@@ -1,5 +1,4 @@
-﻿#if !SILVERLIGHT && !WPF && !WINDOWS_PHONE
-namespace SadConsole
+﻿namespace SadConsole
 {
     public enum HorizontalAlignment
     {
@@ -23,4 +22,3 @@ namespace SadConsole
         Horizontal = 1,
     }
 }
-#endif

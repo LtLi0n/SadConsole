@@ -1,8 +1,5 @@
-﻿#if XNA
-using Microsoft.Xna.Framework;
-#endif
-
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
+using SadRogue.Primitives;
 
 namespace SadConsole.Effects
 {
@@ -17,13 +14,13 @@ namespace SadConsole.Effects
         /// Gets or sets the color gradient used to fade for the cell background.
         /// </summary>
         [DataMember]
-        public ColorGradient DestinationBackground { get; set; }
+        public Gradient DestinationBackground { get; set; }
 
         /// <summary>
         /// Gets or sets the color gradient used to fade for the cell background.
         /// </summary>
         [DataMember]
-        public ColorGradient DestinationForeground { get; set; }
+        public Gradient DestinationForeground { get; set; }
 
         /// <summary>
         /// Gets or sets how long the fade takes to complete in seconds.
@@ -98,7 +95,10 @@ namespace SadConsole.Effects
             if (FadeForeground)
             {
                 if (UseCellForeground)
-                    DestinationForeground.Stops[UseCellDestinationReverse ? DestinationForeground.Stops.Length - 1 : 0].Color = cell.State.Value.Foreground;
+                {
+                    var index = UseCellDestinationReverse ? DestinationForeground.Stops.Length - 1 : 0;
+                    DestinationForeground.Stops[index] = new GradientStop(cell.State.Value.Foreground, DestinationForeground.Stops[index].Stop);
+                }
 
                 cell.Foreground = DestinationForeground.Lerp((float)_calculatedValue);
             }
@@ -106,7 +106,10 @@ namespace SadConsole.Effects
             if (FadeBackground)
             {
                 if (UseCellBackground)
-                    DestinationBackground.Stops[UseCellDestinationReverse ? DestinationBackground.Stops.Length - 1 : 0].Color = cell.State.Value.Background;
+                {
+                    var index = UseCellDestinationReverse ? DestinationBackground.Stops.Length - 1 : 0;
+                    DestinationBackground.Stops[index] = new GradientStop(cell.State.Value.Background, DestinationBackground.Stops[index].Stop);
+                }
 
                 cell.Background = DestinationBackground.Lerp((float)_calculatedValue);
             }

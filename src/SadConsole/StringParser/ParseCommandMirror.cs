@@ -1,6 +1,4 @@
-﻿#if XNA
-using Microsoft.Xna.Framework.Graphics;
-#endif
+﻿using SadRogue.Primitives;
 
 namespace SadConsole.StringParser
 {
@@ -12,7 +10,7 @@ namespace SadConsole.StringParser
     /// </summary>
     public sealed class ParseCommandMirror : ParseCommandBase
     {
-        public SpriteEffects Mirror;
+        public CellMirror Mirror;
         public int Counter;
 
         public ParseCommandMirror(string parameters)

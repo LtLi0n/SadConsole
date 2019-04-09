@@ -2,6 +2,7 @@
 using System.Runtime.Serialization;
 using System.Linq;
 using Newtonsoft.Json;
+using SadRogue.Primitives;
 
 namespace SadConsole.SerializedTypes
 {

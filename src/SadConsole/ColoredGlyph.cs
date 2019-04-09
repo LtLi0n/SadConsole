@@ -1,11 +1,8 @@
-﻿#if XNA
-using Microsoft.Xna.Framework;
-#endif
+﻿using SadRogue.Primitives;
+using SadConsole.Effects;
 
 namespace SadConsole
 {
-    using SadConsole.Effects;
-    
     /// <summary>
     /// Represents a single character that has a foreground and background color.
     /// </summary>

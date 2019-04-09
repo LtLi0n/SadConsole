@@ -1,14 +1,10 @@
-﻿#if XNA
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-#endif
+﻿using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+using SadRogue.Primitives;
 
 namespace SadConsole
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Runtime.Serialization;
-
     /// <summary>
     /// The font stored by the engine. Used to generate the <see cref="Font"/> type used by the engine.
     /// </summary>
@@ -78,7 +74,7 @@ namespace SadConsole
         /// <summary>
         /// The texture used by the font.
         /// </summary>
-        public Texture2D Image { get; internal set; }
+        public Graphics.ITexture Image { get; internal set; }
 
         /// <summary>
         /// A cached array of rectangles of individual glyphs.
@@ -99,7 +95,7 @@ namespace SadConsole
         /// <param name="glyphHeight">The height of each glyph.</param>
         /// <param name="totalColumns">Glyph columns in the font texture, defaults to 16.</param>
         /// <param name="glyphPadding">Pixels between each glyph, defaults to 0.</param>
-        public FontMaster(Texture2D fontImage, int glyphWidth, int glyphHeight, int totalColumns = 16, int glyphPadding = 0)
+        public FontMaster(Graphics.ITexture fontImage, int glyphWidth, int glyphHeight, int totalColumns = 16, int glyphPadding = 0)
         {
             cachedFonts = new Dictionary<Font.FontSizes, Font>();
             Image = fontImage;
@@ -145,14 +141,14 @@ namespace SadConsole
             /// <summary>
             /// The mirror effect of the decorator.
             /// </summary>
-            public SpriteEffects Mirror { get; }
+            public CellMirror Mirror { get; }
 
             /// <summary>
             /// Creates a new cell decorator instance.
             /// </summary>
             /// <param name="glyph"></param>
             /// <param name="mirror"></param>
-            public GlyphDefinition(int glyph, SpriteEffects mirror)
+            public GlyphDefinition(int glyph, CellMirror mirror)
             {
                 Glyph = glyph;
                 Mirror = mirror;
@@ -186,8 +182,8 @@ namespace SadConsole
             // I know.. bad way to do this.. yuck
             if (!Settings.LoadingEmbeddedFont)
             {
-                using (System.IO.Stream fontStream = TitleContainer.OpenStream(LoadedFilePath))
-                    Image = Texture2D.FromStream(Global.GraphicsDevice, fontStream);
+                //using (System.IO.Stream fontStream = TitleContainer.OpenStream(LoadedFilePath))
+                //    Image = Texture2D.FromStream(Global.GraphicsDevice, fontStream);
 
                 ConfigureRects();
             }

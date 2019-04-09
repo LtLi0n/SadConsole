@@ -77,7 +77,7 @@ namespace SadConsole.Themes
                     _oldCaretPosition = textbox.CaretPosition;
                     _oldState = textbox.State;
                     _editingText = textbox.EditingText;
-                    textbox.Surface.Fill(appearance.Foreground, appearance.Background, 0, SpriteEffects.None);
+                    textbox.Surface.Fill(appearance.Foreground, appearance.Background, 0, CellMirror.None);
                     if (string.IsNullOrEmpty(textbox.PasswordChar))
                     {
                         textbox.Surface.Print(0, 0, textbox.EditingText.Substring(textbox.LeftDrawOffset));
@@ -93,7 +93,7 @@ namespace SadConsole.Themes
                 else if (_oldCaretPosition != textbox.CaretPosition || _oldState != textbox.State || _editingText != textbox.EditingText)
                 {
                     textbox.Surface.Effects.RemoveAll();
-                    textbox.Surface.Fill(appearance.Foreground, appearance.Background, 0, SpriteEffects.None);
+                    textbox.Surface.Fill(appearance.Foreground, appearance.Background, 0, CellMirror.None);
                     if (string.IsNullOrEmpty(textbox.PasswordChar))
                     {
                         textbox.Surface.Print(0, 0, textbox.EditingText.Substring(textbox.LeftDrawOffset));

@@ -1,17 +1,13 @@
-﻿#if XNA
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-#endif
+﻿using SadConsole.Effects;
+using SadConsole.StringParser;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
+using SadRogue.Primitives;
 
 namespace SadConsole
 {
-    using SadConsole.Effects;
-    using SadConsole.StringParser;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Runtime.Serialization;
-
     /// <summary>
     /// Represents a string that has foreground and background colors for each character in the string.
     /// </summary>
@@ -117,7 +113,7 @@ namespace SadConsole
         /// <param name="foreground">The foreground color for each character.</param>
         /// <param name="background">The background color for each character.</param>
         /// <param name="mirror">The mirror for each character.</param>
-        public ColoredString(string value, Color foreground, Color background, SpriteEffects mirror = SpriteEffects.None)
+        public ColoredString(string value, Color foreground, Color background, CellMirror mirror = CellMirror.None)
         {
             var stacks = new ParseCommandStacks();
             stacks.AddSafe(new ParseCommandRecolor() { R = foreground.R, G = foreground.G, B = foreground.B, A = foreground.A, CommandType = CommandTypes.Foreground });

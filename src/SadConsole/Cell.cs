@@ -1,7 +1,4 @@
-﻿#if XNA
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-#endif
+﻿using SadRogue.Primitives;
 
 namespace SadConsole
 {
@@ -43,7 +40,7 @@ namespace SadConsole
         /// The mirror effect for this cell.
         /// </summary>
         [DataMember]
-        public SpriteEffects Mirror;
+        public CellMirror Mirror;
 
         /// <summary>
         /// When true, indicates this cell should be drawn.
@@ -60,20 +57,20 @@ namespace SadConsole
         /// <summary>
         /// Creates a cell with a white foreground, black background, glyph 0, and no mirror effect.
         /// </summary>
-        public Cell() : this(Color.White, Color.Black, 0, SpriteEffects.None) { }
+        public Cell() : this(Color.White, Color.Black, 0, CellMirror.None) { }
 
         /// <summary>
         /// Creates a cell with the specified foreground, black background, glyph 0, and no mirror effect.
         /// </summary>
         /// <param name="foreground">Foreground color.</param>
-        public Cell(Color foreground) : this(foreground, Color.Black, 0, SpriteEffects.None) { }
+        public Cell(Color foreground) : this(foreground, Color.Black, 0, CellMirror.None) { }
 
         /// <summary>
         /// Creates a cell with the specified foreground, specified background, glyph 0, and no mirror effect.
         /// </summary>
         /// <param name="foreground">Foreground color.</param>
         /// <param name="background">Background color.</param>
-        public Cell(Color foreground, Color background) : this(foreground, background, 0, SpriteEffects.None) { }
+        public Cell(Color foreground, Color background) : this(foreground, background, 0, CellMirror.None) { }
 
         /// <summary>
         /// Creates a cell with the specified foreground, background, and glyph, with no mirror effect.
@@ -81,7 +78,7 @@ namespace SadConsole
         /// <param name="foreground">Foreground color.</param>
         /// <param name="background">Background color.</param>
         /// <param name="glyph">The glyph index.</param>
-        public Cell(Color foreground, Color background, int glyph) : this(foreground, background, glyph, SpriteEffects.None) { }
+        public Cell(Color foreground, Color background, int glyph) : this(foreground, background, glyph, CellMirror.None) { }
 
         /// <summary>
         /// Creates a cell with the specified foreground, background, glyph, and mirror effect.
@@ -90,7 +87,7 @@ namespace SadConsole
         /// <param name="background">Background color.</param>
         /// <param name="glyph">The glyph index.</param>
         /// <param name="mirror">The mirror effect.</param>
-        public Cell(Color foreground, Color background, int glyph, SpriteEffects mirror)
+        public Cell(Color foreground, Color background, int glyph, CellMirror mirror)
         {
             Foreground = foreground;
             Background = background;
@@ -132,7 +129,7 @@ namespace SadConsole
             Foreground = Color.White;
             Background = Color.Black;
             Glyph = 0;
-            Mirror = SpriteEffects.None;
+            Mirror = CellMirror.None;
             Decorators = Array.Empty<CellDecorator>();
         }
 
@@ -157,7 +154,7 @@ namespace SadConsole
         public void Draw(SpriteBatch batch, Rectangle drawingRectangle, Font font)
         {
             if (Background != Color.Transparent)
-                batch.Draw(font.FontImage, drawingRectangle, font.GlyphRects[font.SolidGlyphIndex], Background, 0f, Vector2.Zero, SpriteEffects.None, 0.3f);
+                batch.Draw(font.FontImage, drawingRectangle, font.GlyphRects[font.SolidGlyphIndex], Background, 0f, Vector2.Zero, CellMirror.None, 0.3f);
 
             if (Foreground != Color.Transparent)
                 batch.Draw(font.FontImage, drawingRectangle, font.GlyphRects[Glyph], Foreground, 0f, Vector2.Zero, Mirror, 0.4f);

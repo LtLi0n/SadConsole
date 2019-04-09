@@ -1,14 +1,8 @@
-﻿#if XNA
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-#endif
+﻿using System.Linq;
+using System.Collections.Generic;
 
 namespace SadConsole
 {
-    using System.Linq;
-    using System.Collections.Generic;
-
     /// <summary>
     /// A stack of consoles. The top-most of the stack is considered active and represented by the <see cref="Console"/> property.
     /// </summary>

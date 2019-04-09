@@ -1,9 +1,6 @@
-﻿#if XNA
-using Microsoft.Xna.Framework;
-#endif
-
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
 using SadConsole;
+using SadRogue.Primitives;
 
 namespace SadConsole
 {
@@ -28,28 +25,21 @@ namespace SadConsole
         /// <returns></returns>
         public static Rectangle CenterOnPoint(this Rectangle rect, Point target, int maxWidth, int maxHeight)
         {
-            var newRect = rect;
-            newRect.Location = new Point(target.X - newRect.Width / 2, target.Y - newRect.Height / 2);
+            var newRect = rect.WithCenter(target);
 
-            if (newRect.Right > maxWidth)
-                newRect.X -= newRect.Right - maxWidth;
-            else if (newRect.Left < 0)
-                newRect.X = 0;
+            if (newRect.MaxExtentX >= maxWidth)
+                newRect = newRect.WithX(newRect.X - newRect.MaxExtentX - maxWidth + 1);
+            else if (newRect.X < 0)
+                newRect = newRect.WithX(0);
 
-            if (newRect.Bottom > maxHeight)
-                newRect.Y -= newRect.Bottom - maxHeight;
-            else if (newRect.Top < 0)
-                newRect.Y = 0;
+            if (newRect.MaxExtentY >= maxHeight)
+                newRect = newRect.WithY(newRect.Y - newRect.MaxExtentY - maxHeight + 1);
+            else if (newRect.Y < 0)
+                newRect = newRect.WithY(0);
 
             return newRect;
         }
-    }
-}
 
-namespace Microsoft.Xna.Framework
-{
-    public static class RectangleExtensions2
-    {
         /// <summary>
         /// Converts a rectangle from cells to pixels.
         /// </summary>
@@ -58,7 +48,7 @@ namespace Microsoft.Xna.Framework
         /// <returns>A new rectangle in pixels.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Rectangle ToPixels(this Rectangle rect, Font font) =>
-            new Rectangle(rect.Location * font.Size, rect.Size * font.Size);
+            new Rectangle(rect.Position * font.Size, rect.Size * font.Size);
 
         /// <summary>
         /// Converts a rectangle from cells to pixels.
@@ -78,7 +68,7 @@ namespace Microsoft.Xna.Framework
         /// <param name="font">The font used for translation.</param>
         /// <returns>A new rectangle in cell coordinates.</returns>
         public static Rectangle ToConsole(this Rectangle rect, Font font) =>
-            new Rectangle(rect.Location / font.Size, rect.Size / font.Size);
+            new Rectangle(rect.Position / font.Size, rect.Size / font.Size);
 
         /// <summary>
         /// Converts a rectangle from pixels to cells.

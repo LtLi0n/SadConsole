@@ -1,14 +1,10 @@
-﻿#if XNA
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-#endif
+﻿using SadConsole.DrawCalls;
+using System;
+using System.Collections.Generic;
+using SadRogue.Primitives;
 
 namespace SadConsole
 {
-    using SadConsole.DrawCalls;
-    using System;
-    using System.Collections.Generic;
-
     public partial class Console
     {
         private Color _tint = Color.Transparent;

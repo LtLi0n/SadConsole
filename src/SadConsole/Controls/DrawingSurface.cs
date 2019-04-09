@@ -1,8 +1,8 @@
-﻿namespace SadConsole.Controls
-{
-    using System;
-    using System.Runtime.Serialization;
+﻿using System;
+using System.Runtime.Serialization;
 
+namespace SadConsole.Controls
+{
     /// <summary>
     /// A simple surface for drawing text that can be moved and sized like a control.
     /// </summary>

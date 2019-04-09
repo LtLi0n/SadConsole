@@ -1,13 +1,10 @@
-﻿#if XNA
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
-#endif
-
+﻿using SadRogue.Primitives;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using SadConsole.DrawCalls;
+using System.Numerics;
 
 namespace SadConsole
 {

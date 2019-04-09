@@ -1,10 +1,7 @@
-﻿#if XNA
-using Microsoft.Xna.Framework;
-#endif
-
-using SadConsole.Input;
+﻿using SadConsole.Input;
 using System.Runtime.Serialization;
 using System;
+using SadRogue.Primitives;
 
 namespace SadConsole.Controls
 {
@@ -76,7 +73,7 @@ namespace SadConsole.Controls
                 var oldPosition = position;
                 position = value;
                 Bounds = new Rectangle(position.X, position.Y, Width, Height);
-                var mouseBoundsPosition = MouseBounds.Location + value - oldPosition;
+                var mouseBoundsPosition = MouseBounds.Position + value - oldPosition;
                 MouseBounds = new Rectangle(mouseBoundsPosition.X, mouseBoundsPosition.Y, MouseBounds.Width, MouseBounds.Height);
                 OnPositionChanged();
             }

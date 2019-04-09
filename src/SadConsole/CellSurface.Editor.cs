@@ -4,8 +4,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 using System.Text;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+using SadRogue.Primitives;
 using SadConsole.Effects;
 using SadConsole.StringParser;
 
@@ -69,14 +68,14 @@ namespace SadConsole
             if (pixels.Length != area.Width * area.Height)
                 throw new ArgumentOutOfRangeException(nameof(pixels), "The amount of colors do not match the size of the area.");
 
-            for (var x = area.Left; x < area.Left + area.Width; x++)
+            for (var x = area.X; x < area.X + area.Width; x++)
             {
-                for (var y = area.Top; y < area.Top + area.Height; y++)
+                for (var y = area.Y; y < area.Y + area.Height; y++)
                 {
                     var index = y * Width + x;
 
                     if (IsValidCell(index))
-                        Cells[y * Width + x].Background = pixels[(y - area.Top) * area.Width + (x - area.Left)];
+                        Cells[y * Width + x].Background = pixels[(y - area.Y) * area.Width + (x - area.X)];
                 }
             }
 
@@ -180,7 +179,7 @@ namespace SadConsole
         /// <param name="foreground">The desired foreground.</param>
         /// <param name="background">The desired background.</param>
         /// <param name="mirror">Sets how the glyph will be mirrored.</param>
-        public void SetGlyph(int x, int y, int glyph, Color foreground, Color background, SpriteEffects mirror)
+        public void SetGlyph(int x, int y, int glyph, Color foreground, Color background, CellMirror mirror)
         {
             if (!IsValidCell(x, y, out var index)) return;
             
@@ -202,7 +201,7 @@ namespace SadConsole
         /// <param name="background">The desired background.</param>
         /// <param name="mirror">Sets how the glyph will be mirrored.</param>
         /// <param name="decorators">Decorators to set on the cell. Will clear existing decorators first.</param>
-        public void SetGlyph(int x, int y, int glyph, Color foreground, Color background, SpriteEffects mirror, IEnumerable<CellDecorator> decorators)
+        public void SetGlyph(int x, int y, int glyph, Color foreground, Color background, CellMirror mirror, IEnumerable<CellDecorator> decorators)
         {
             if (!IsValidCell(x, y, out var index)) return;
             
@@ -363,13 +362,13 @@ namespace SadConsole
         {
             area = Rectangle.Intersect(area, new Rectangle(0, 0, Width, Height));
             
-            if (area == Rectangle.Empty) yield break;
+            if (area == default(Rectangle)) yield break;
 
             for (var y = 0; y < area.Height; y++)
             {
                 for (var x = 0; x < area.Width; x++)
                 {
-                    yield return Cells[(y + area.Top) * Width + (x + area.Left)];
+                    yield return Cells[(y + area.Y) * Width + (x + area.X)];
                 }
             }
         }
@@ -380,7 +379,7 @@ namespace SadConsole
         /// <param name="x">The x location of the cell.</param>
         /// <param name="y">The y location of the cell.</param>
         /// <returns>The color.</returns>
-        public SpriteEffects GetMirror(int x, int y) => Cells[y * Width + x].Mirror;
+        public CellMirror GetMirror(int x, int y) => Cells[y * Width + x].Mirror;
 
         /// <summary>
         /// Sets the sprite effect of a specified cell.
@@ -388,7 +387,7 @@ namespace SadConsole
         /// <param name="x">The x location of the cell.</param>
         /// <param name="y">The y location of the cell.</param>
         /// <param name="mirror">The mirror of the cell.</param>
-        public void SetMirror(int x, int y, SpriteEffects mirror)
+        public void SetMirror(int x, int y, CellMirror mirror)
         {
             if (!IsValidCell(x, y, out var index)) return;
 
@@ -603,7 +602,7 @@ namespace SadConsole
         /// <param name="foreground">Sets the foreground of all characters in the text.</param>
         /// <param name="background">Sets the background of all characters in the text.</param>
         /// <param name="mirror">The mirror to set on all characters in the text.</param>
-        public void Print(int x, int y, string text, Color foreground, Color background, SpriteEffects mirror)
+        public void Print(int x, int y, string text, Color foreground, Color background, CellMirror mirror)
         {
             if (string.IsNullOrEmpty(text))
                 return;
@@ -644,7 +643,7 @@ namespace SadConsole
         /// <param name="y">Y location of the text.</param>
         /// <param name="text">The string to display.</param>
         /// <param name="mirror">The mirror to set on all characters in the text.</param>
-        public void Print(int x, int y, string text, SpriteEffects mirror)
+        public void Print(int x, int y, string text, CellMirror mirror)
         {
             if (string.IsNullOrEmpty(text))
                 return;
@@ -1155,7 +1154,7 @@ namespace SadConsole
         /// <summary>
         /// Clears the console data. Characters are reset to 0, the foreground and background are set to default, and effect set to none. Clears cell decorators.
         /// </summary>
-        public void Clear() => Fill(DefaultForeground, DefaultBackground, 0, SpriteEffects.None);
+        public void Clear() => Fill(DefaultForeground, DefaultBackground, 0, CellMirror.None);
 
         /// <summary>
         /// Clears a cell. Character is reset to 0, the foreground and background is set to default, and effect is set to none. Clears cell decorators.
@@ -1182,14 +1181,14 @@ namespace SadConsole
         /// <remarks>This works similarly to printing a string of whitespace</remarks>
         public void Clear(int x, int y, int length) 
         {
-            Fill(x, y, length, DefaultForeground, DefaultBackground, 0, SpriteEffects.None);
+            Fill(x, y, length, DefaultForeground, DefaultBackground, 0, CellMirror.None);
         }
 
         /// <summary>
         /// Clears an area of cells. Character is reset to 0, the foreground and background is set to default, and effect is set to none. Clears cell decorators.
         /// </summary>
         /// <param name="area"></param>
-        public void Clear(Rectangle area) => Fill(area, DefaultForeground, DefaultBackground, 0, SpriteEffects.None);
+        public void Clear(Rectangle area) => Fill(area, DefaultForeground, DefaultBackground, 0, CellMirror.None);
 
         /// <summary>
         /// Fills the console. Clears cell decorators.
@@ -1199,7 +1198,7 @@ namespace SadConsole
         /// <param name="glyph">Glyph to apply. If null, skips.</param>
         /// <param name="mirror">Sprite effect to apply. If null, skips.</param>
         /// <returns>The array of all cells in this console, starting from the top left corner.</returns>
-        public Cell[] Fill(Color? foreground, Color? background, int? glyph, SpriteEffects? mirror = null)
+        public Cell[] Fill(Color? foreground, Color? background, int? glyph, CellMirror? mirror = null)
         {
             for (var i = 0; i < Cells.Length; i++)
             {
@@ -1230,7 +1229,7 @@ namespace SadConsole
         /// <param name="glyph">Glyph to apply. If null, skips.</param>
         /// <param name="mirror">Sprite effect to apply. If null, skips.</param>
         /// <returns>An array containing the affected cells, starting from the top left corner. If x or y are out of bounds, nothing happens and an empty array is returned</returns>
-        public Cell[] Fill(int x, int y, int length, Color? foreground, Color? background, int? glyph, SpriteEffects? mirror = null) {
+        public Cell[] Fill(int x, int y, int length, Color? foreground, Color? background, int? glyph, CellMirror? mirror = null) {
 
 
             if (!IsValidCell(x, y, out int index)) return new Cell[0];
@@ -1270,7 +1269,7 @@ namespace SadConsole
         /// <param name="glyph">Glyph to apply. If null, skips.</param>
         /// <param name="mirror">Sprite effect to apply. If null, skips.</param>
         /// <returns>An array containing the affected cells, starting from the top left corner. If the area is out of bounds, nothing happens and an empty array is returned.</returns>
-        public Cell[] Fill(Rectangle area, Color? foreground, Color? background, int? glyph, SpriteEffects? mirror = null)
+        public Cell[] Fill(Rectangle area, Color? foreground, Color? background, int? glyph, CellMirror? mirror = null)
         {
             area = Rectangle.Intersect(area, new Rectangle(0, 0, Width, Height));
 
@@ -1279,9 +1278,9 @@ namespace SadConsole
             var result = new Cell[area.Width * area.Height];
             int resultIndex = 0;
 
-            for (var x = area.Left; x < area.Left + area.Width; x++)
+            for (var x = area.X; x < area.X + area.Width; x++)
             {
-                for (var y = area.Top; y < area.Top + area.Height; y++)
+                for (var y = area.Y; y < area.Y + area.Height; y++)
                 {
                     var cell = Cells[y * Width + x];
 
@@ -1391,14 +1390,14 @@ namespace SadConsole
             DrawLine(area.Location + new Point(area.Width - 1, 0), area.Location + new Point(area.Width - 1, area.Height - 1), border.Foreground, border.Background, connectedLineStyle[(int)ConnectedLineIndex.Right]);
 
             // Tweak the corners
-            SetGlyph(area.Left, area.Top, connectedLineStyle[(int) ConnectedLineIndex.TopLeft]);
-            SetGlyph(area.Right - 1, area.Top, connectedLineStyle[(int) ConnectedLineIndex.TopRight]);
-            SetGlyph(area.Left, area.Bottom - 1, connectedLineStyle[(int) ConnectedLineIndex.BottomLeft]);
+            SetGlyph(area.X, area.Y, connectedLineStyle[(int) ConnectedLineIndex.TopLeft]);
+            SetGlyph(area.Right - 1, area.Y, connectedLineStyle[(int) ConnectedLineIndex.TopRight]);
+            SetGlyph(area.X, area.Bottom - 1, connectedLineStyle[(int) ConnectedLineIndex.BottomLeft]);
             SetGlyph(area.Right - 1, area.Bottom - 1, connectedLineStyle[(int) ConnectedLineIndex.BottomRight]);
 
             // Fill
             if (fill == null) return;
-            area.Inflate(-1, -1);
+            area = area.Inflate(-1, -1);
             Fill(area, fill.Foreground, fill.Background, fill.Glyph);
         }
 
@@ -1757,7 +1756,7 @@ namespace SadConsole
             {
                 for (var x = 0; x < rect.Width; x++)
                 {
-                    Cells[index] = surface.Cells[(y + rect.Top) * surface.Width + (x + rect.Left)];
+                    Cells[index] = surface.Cells[(y + rect.Y) * surface.Width + (x + rect.X)];
                     index++;
                 }
             }
@@ -1795,7 +1794,7 @@ namespace SadConsole
                     SetForeground(x, y, new Color((byte)Global.Random.Next(0, 256), (byte)Global.Random.Next(0, 256), (byte)Global.Random.Next(0, 256), (byte)255));
                     SetBackground(x, y, DefaultBackground);
                     SetBackground(x, y, new Color((byte)Global.Random.Next(0, 256), (byte)Global.Random.Next(0, 256), (byte)Global.Random.Next(0, 256), (byte)255));
-                    SetMirror(x, y, (SpriteEffects)Global.Random.Next(0, 4));
+                    SetMirror(x, y, (CellMirror)Global.Random.Next(0, 4));
                     charCounter++;
                     if (charCounter > 255)
                         charCounter = 0;

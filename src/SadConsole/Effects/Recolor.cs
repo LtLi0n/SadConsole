@@ -1,7 +1,4 @@
-﻿#if XNA
-using Microsoft.Xna.Framework;
-#endif
-
+﻿using SadRogue.Primitives;
 using System.Runtime.Serialization;
 
 namespace SadConsole.Effects
@@ -113,7 +110,7 @@ namespace SadConsole.Effects
 
         public override string ToString()
         {
-            return string.Format("RECOLOR-{0}-{1}-{2}-{3}-{4}", Foreground.ToInteger(), Background.ToInteger(), Permanent, StartDelay, RemoveOnFinished);
+            return string.Format("RECOLOR-{0}-{1}-{2}-{3}-{4}", Foreground.PackedValue, Background.PackedValue, Permanent, StartDelay, RemoveOnFinished);
         }
     }
 }

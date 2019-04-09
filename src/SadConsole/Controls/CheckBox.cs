@@ -1,8 +1,4 @@
-﻿#if XNA
-using Microsoft.Xna.Framework.Input;
-#endif
-
-using System;
+﻿using System;
 using System.Runtime.Serialization;
 
 namespace SadConsole.Controls

@@ -1,10 +1,6 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using ColorHelper = Microsoft.Xna.Framework.Color;
-
-using SadConsole;
+﻿using SadConsole;
 using SadConsole.StringParser;
-using System.Windows;
+using SadRogue.Primitives;
 
 namespace System
 {
@@ -79,7 +75,7 @@ namespace System
         /// <param name="background">The background color. If null, <see cref="ColoredString.IgnoreBackground"/> will be set.</param>
         /// <param name="mirror">The mirror setting. If null, <see cref="ColoredString.IgnoreMirror"/> will be set.</param>
         /// <returns>A <see cref="ColoredString"/> object instace.</returns>
-        public static ColoredString CreateColored(this string value, Color? foreground = null, Color? background = null, SpriteEffects? mirror = null)
+        public static ColoredString CreateColored(this string value, Color? foreground = null, Color? background = null, CellMirror? mirror = null)
         {
             var stacks = new ParseCommandStacks();
 
@@ -119,7 +115,7 @@ namespace System
 
             for (int i = 0; i < value.Length; i++)
             {
-                newString[i].Foreground = ColorHelper.Lerp(startingForeground, endingForeground, (float)i / (float)value.Length);
+                newString[i].Foreground = Color.Lerp(startingForeground, endingForeground, (float)i / (float)value.Length);
             }
 
             newString.IgnoreBackground = true;
@@ -143,8 +139,8 @@ namespace System
 
             for (int i = 0; i < value.Length; i++)
             {
-                newString[i].Foreground = ColorHelper.Lerp(startingForeground, endingForeground, (float)i / (float)value.Length);
-                newString[i].Background = ColorHelper.Lerp(startingBackground, endingBackground, (float)i / (float)value.Length);
+                newString[i].Foreground = Color.Lerp(startingForeground, endingForeground, (float)i / (float)value.Length);
+                newString[i].Background = Color.Lerp(startingBackground, endingBackground, (float)i / (float)value.Length);
             }
 
             newString.IgnoreMirror = true;

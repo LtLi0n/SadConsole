@@ -1,9 +1,6 @@
-﻿#if XNA
-using Microsoft.Xna.Framework;
-#endif
-
-using System;
+﻿using System;
 using SadConsole.Entities;
+using SadRogue.Primitives;
 
 namespace SadConsole.Components
 {
@@ -55,11 +52,11 @@ namespace SadConsole.Components
         /// <inheritdoc />
         public override void OnRemoved(Console console)
         {
-            _oldPosition = Point.Zero;
-            _oldView = Rectangle.Empty;
+            _oldPosition = default;
+            _oldView = default;
 
             console.IsVisible = true;
-            ((Entity)console).PositionOffset = Point.Zero;
+            ((Entity)console).PositionOffset = default;
         }
     }
 }

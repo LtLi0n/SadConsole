@@ -1,9 +1,4 @@
-﻿#if XNA
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
-#endif
-
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Runtime.Serialization;
 using SadConsole.DrawCalls;
@@ -11,6 +6,7 @@ using SadConsole.Input;
 using SadConsole.Themes;
 using Keyboard = SadConsole.Input.Keyboard;
 using Mouse = SadConsole.Input.Mouse;
+using SadRogue.Primitives;
 
 namespace SadConsole
 {

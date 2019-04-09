@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using Microsoft.Xna.Framework.Input;
+using SadRogue.Primitives;
 using scases = System.Tuple<char, char>;
 using ncases = System.Tuple<char, Microsoft.Xna.Framework.Input.Keys>;
 

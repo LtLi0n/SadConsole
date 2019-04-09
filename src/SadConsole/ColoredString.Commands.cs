@@ -1,9 +1,9 @@
-﻿namespace SadConsole
-{
-    using SadConsole.StringParser;
-    using System;
-    using System.Collections.Generic;
+﻿using SadConsole.StringParser;
+using System;
+using System.Collections.Generic;
 
+namespace SadConsole
+{
     public partial class ColoredString
     {
         /// <summary>

@@ -1,7 +1,4 @@
-﻿#if XNA
-using Microsoft.Xna.Framework;
-#endif
-
+﻿using SadRogue.Primitives;
 using System;
 
 namespace SadConsole.Instructions
@@ -12,12 +9,12 @@ namespace SadConsole.Instructions
     public class FadeTextSurfaceTint : InstructionBase
     {
         private Console _console;
-        private ColorGradient _colors;
+        private Gradient _colors;
 
         /// <summary>
         /// The color to fade the tint to.
         /// </summary>
-        public ColorGradient Colors
+        public Gradient Colors
         {
             get => _colors;
             set => _colors = value ?? throw new Exception($"{nameof(Colors)} can't be set to null");
@@ -34,7 +31,7 @@ namespace SadConsole.Instructions
         /// <param name="console">The <see cref="Console.Tint"/> to fade.</param>
         /// <param name="colors">The gradient pattern to fade through.</param>
         /// <param name="duration">How long the fade takes.</param>
-        public FadeTextSurfaceTint(Console console, ColorGradient colors, TimeSpan duration)
+        public FadeTextSurfaceTint(Console console, Gradient colors, TimeSpan duration)
         {
             Colors = colors;
             FadeAnimationSettings = new DoubleAnimation() { StartingValue = 0d, EndingValue = 1d, Duration = duration };
@@ -46,7 +43,7 @@ namespace SadConsole.Instructions
         /// </summary>
         /// <param name="colors">The gradient pattern to fade through.</param>
         /// <param name="duration">How long the fade takes.</param>
-        public FadeTextSurfaceTint(ColorGradient colors, TimeSpan duration)
+        public FadeTextSurfaceTint(Gradient colors, TimeSpan duration)
         {
             Colors = colors;
             FadeAnimationSettings = new DoubleAnimation() { StartingValue = 0d, EndingValue = 1d, Duration = duration };
@@ -63,7 +60,7 @@ namespace SadConsole.Instructions
         /// </remarks>
         public FadeTextSurfaceTint()
         {
-            Colors = new ColorGradient(Color.White, Color.Transparent);
+            Colors = new Gradient(Color.White, Color.Transparent);
             FadeAnimationSettings = new DoubleAnimation() { StartingValue = 0d, EndingValue = 1d, Duration = new TimeSpan(0, 0, 1) };
 
         }

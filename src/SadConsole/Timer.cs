@@ -1,7 +1,7 @@
-﻿namespace SadConsole
+﻿using System;
+
+namespace SadConsole
 {
-    using System;
-    
     /// <summary>
     /// A simple timer with callback.
     /// </summary>

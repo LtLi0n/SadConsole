@@ -1,10 +1,7 @@
-﻿#if XNA
-using Microsoft.Xna.Framework;
-#endif
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 using SadConsole.SerializedTypes;
+using SadRogue.Primitives;
 
 namespace SadConsole.Entities
 {
@@ -140,9 +137,9 @@ namespace SadConsole.Entities
         public override void OnCalculateRenderPosition()
         {
             if (UsePixelPositioning)
-                CalculatedPosition = Position + PositionOffset + (Parent?.CalculatedPosition ?? Point.Zero);
+                CalculatedPosition = Position + PositionOffset + (Parent?.CalculatedPosition ?? new Point(0, 0));
             else
-                CalculatedPosition = Position.ConsoleLocationToPixel(Font) + PositionOffset.ConsoleLocationToPixel(Font) + (Parent?.CalculatedPosition ?? Point.Zero);
+                CalculatedPosition = Position.ConsoleLocationToPixel(Font) + PositionOffset.ConsoleLocationToPixel(Font) + (Parent?.CalculatedPosition ?? new Point(0, 0));
 
             foreach (var child in Children)
             {

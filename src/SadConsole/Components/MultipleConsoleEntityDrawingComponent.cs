@@ -1,11 +1,8 @@
-﻿#if XNA
-using Microsoft.Xna.Framework;
-#endif
-
-using System;
+﻿using System;
 using SadConsole.Entities;
 using System.Collections.Generic;
 using Console = SadConsole.Console;
+using SadRogue.Primitives;
 
 namespace SadConsole.Components
 {

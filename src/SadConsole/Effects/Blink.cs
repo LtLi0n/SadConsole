@@ -1,8 +1,5 @@
-﻿#if XNA
-using Microsoft.Xna.Framework;
-#endif
-
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
+using SadRogue.Primitives;
 
 namespace SadConsole.Effects
 {

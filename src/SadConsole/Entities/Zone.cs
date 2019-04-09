@@ -1,11 +1,8 @@
-﻿#if XNA
-using Microsoft.Xna.Framework;
-#endif
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using SadConsole.DrawCalls;
+using SadRogue.Primitives;
 
 namespace SadConsole.Entities
 {
@@ -128,7 +125,7 @@ namespace SadConsole.Entities
                 Resize(_title.Length, 1, true);
                 Print(0, 0, _title);
                 
-                _drawCallScreenObject = new DrawCallScreenObject(this, Point.Zero, UsePixelPositioning);
+                _drawCallScreenObject = new DrawCallScreenObject(this, new Point(0, 0), UsePixelPositioning);
                 _drawCallZone = new DrawCallColoredRect(Area, DebugAppearance.Background);
             }
         }

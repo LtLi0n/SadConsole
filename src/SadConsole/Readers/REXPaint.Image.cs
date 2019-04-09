@@ -1,8 +1,4 @@
-﻿#if XNA
-using FrameworkColor = Microsoft.Xna.Framework.Color;
-#else
-using FrameworkColor = SadConsole.Color;
-#endif
+﻿using FrameworkColor = SadRogue.Primitives.Color;
 
 namespace SadConsole.Readers
 {

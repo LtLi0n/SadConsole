@@ -1,6 +1,4 @@
-﻿#if XNA
-using Microsoft.Xna.Framework;
-#endif
+﻿using SadRogue.Primitives;
 
 namespace SadConsole.StringParser
 {
@@ -39,7 +37,7 @@ namespace SadConsole.StringParser
                     steps.Add(Color.White.FromParser(parametersArray[i], out keep, out keep, out keep, out keep, out useDefault));
                 }
 
-                GradientString = new ColorGradient(steps.ToArray()).ToColoredString(new string(' ', Length));
+                GradientString = new Gradient(steps.ToArray()).ToColoredString(new string(' ', Length));
             }
 
             else

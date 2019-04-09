@@ -1,12 +1,10 @@
-﻿#if XNA
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-#endif
+﻿using SadRogue.Primitives;
+using System.Runtime.Serialization;
+using System.Linq;
 
 namespace SadConsole.SerializedTypes
 {
-    using System.Runtime.Serialization;
-    using System.Linq;
+    
 
     [DataContract]
     public class CellSerialized
@@ -24,7 +22,7 @@ namespace SadConsole.SerializedTypes
         public int Glyph;
 
         [DataMember]
-        public SpriteEffects Mirror;
+        public CellMirror Mirror;
 
         [DataMember]
         public bool IsVisible;
@@ -77,7 +75,7 @@ namespace SadConsole.SerializedTypes
         public int Glyph;
 
         [DataMember]
-        public SpriteEffects Mirror;
+        public CellMirror Mirror;
 
         [DataMember]
         public bool IsVisible = true;

@@ -1,6 +1,4 @@
-﻿#if XNA
-using Microsoft.Xna.Framework;
-#endif
+﻿using SadRogue.Primitives;
 
 namespace SadConsole
 {
@@ -50,21 +48,15 @@ namespace SadConsole
         public static bool DoUpdate = true;
 
         /// <summary>
-        /// The <see cref="Microsoft.Xna.Framework.Graphics.GraphicsProfile"/> value to use.
-        /// </summary>
-        public static Microsoft.Xna.Framework.Graphics.GraphicsProfile GraphicsProfile = Microsoft.Xna.Framework.Graphics.GraphicsProfile.Reach;
-
-        internal static bool IsExitingFullscreen = false;
-
-        /// <summary>
         /// Tells MonoGame to use a full screen resolution change instead of soft (quick) full screen. Must be set before the game is created.
         /// </summary>
         public static bool UseHardwareFullScreen { get; set; } = false;
+        internal static bool IsExitingFullscreen = false;
 
         /// <summary>
         /// When not set to (0,0) this property specifies the minimum size of the game window in pixels.
         /// </summary>
-        public static Point WindowMinimumSize { get; set; } = Point.Zero;
+        public static Point WindowMinimumSize { get; set; } = new Point(0, 0);
 
         /// <summary>
         /// When set to true, all loading and saving performed by SadConsole uses GZIP. <see cref="Global.LoadFont(string)"/> does not use this setting and always runs uncompressed.

@@ -1,7 +1,4 @@
-﻿#if XNA
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-#endif
+﻿using SadRogue.Primitives;
 
 namespace SadConsole
 {
@@ -44,7 +41,7 @@ namespace SadConsole
         /// Mirror setting of the state.
         /// </summary>
         [DataMember]
-        public readonly SpriteEffects Mirror;
+        public readonly CellMirror Mirror;
 
         /// <summary>
         /// Visible setting of the state.
@@ -61,7 +58,7 @@ namespace SadConsole
         /// <param name="mirror">Mirror setting.</param>
         /// <param name="isVisible">Visbility setting.</param>
         /// <param name="decorators">Decorators setting.</param>
-        public CellState(Color foreground, Color background, int glyph, SpriteEffects mirror, bool isVisible, CellDecorator[] decorators)
+        public CellState(Color foreground, Color background, int glyph, CellMirror mirror, bool isVisible, CellDecorator[] decorators)
         {
             Foreground = foreground;
             Background = background;

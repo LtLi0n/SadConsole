@@ -1,13 +1,9 @@
-﻿#if XNA
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-#endif
+﻿using System;
+using System.Runtime.CompilerServices;
+using SadRogue.Primitives;
 
 namespace SadConsole
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     /// <summary>
     /// Represents a specific font size from a <see cref="FontMaster"/>.
     /// </summary>
@@ -55,7 +51,7 @@ namespace SadConsole
         /// <summary>
         /// The texture of the font.
         /// </summary>
-        public Texture2D FontImage { get; private set; }
+        public Graphics.ITexture FontImage { get; private set; }
 
         /// <summary>
         /// The width and height of each glyph.
@@ -154,25 +150,6 @@ namespace SadConsole
             SolidGlyphIndex = masterFont.SolidGlyphIndex;
             Rows = masterFont.Rows;
             Columns = masterFont.Columns;
-        }
-
-        /// <summary>
-        /// Resizes the graphics device manager based on this font's glyph size.
-        /// </summary>
-        /// <param name="manager">Graphics device manager to resize.</param>
-        /// <param name="width">The width glyphs.</param>
-        /// <param name="height">The height glyphs.</param>
-        /// <param name="additionalWidth">Additional pixel width to add to the resize.</param>
-        /// <param name="additionalHeight">Additional pixel height to add to the resize.</param>
-        public void ResizeGraphicsDeviceManager(GraphicsDeviceManager manager, int width, int height, int additionalWidth, int additionalHeight)
-        {
-            manager.PreferredBackBufferWidth = (Size.X * width) + additionalWidth;
-            manager.PreferredBackBufferHeight = (Size.Y * height) + additionalHeight;
-
-            Global.RenderWidth = manager.PreferredBackBufferWidth;
-            Global.RenderHeight = manager.PreferredBackBufferHeight;
-
-            manager.ApplyChanges();
         }
 
         /// <summary>

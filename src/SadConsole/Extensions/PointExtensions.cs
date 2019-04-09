@@ -1,7 +1,8 @@
 ﻿using System.Runtime.CompilerServices;
-using SadConsole;
+using SadRogue.Primitives;
+using System.Numerics;
 
-namespace Microsoft.Xna.Framework
+namespace SadConsole
 {
     public static class PointExtensions
     {
@@ -79,22 +80,34 @@ namespace Microsoft.Xna.Framework
             point.ConsoleLocationToPixel(sourceFont.Size.X, sourceFont.Size.Y).PixelLocationToConsole(targetFont.Size.X, targetFont.Size.Y);
 
         /// <summary>
+        /// Converts a point to a vector.
+        /// </summary>
+        /// <param name="point">The point to convert.</param>
+        /// <returns>A new vector.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 ToVector2(this Point point) =>
+            new Vector2(point.X, point.Y);
+
+        /// <summary>
         /// Creates a position matrix (in pixels) based on the position of a cell.
         /// </summary>
         /// <param name="position">The cell position.</param>
         /// <param name="cellSize">The size of the cell in pixels.</param>
         /// <param name="absolutePositioning">When true, indicates that the <paramref name="position"/> indicates pixels, not cell coordinates.</param>
         /// <returns>A matrix for rendering.</returns>
-        public static Matrix ToPositionMatrix(this Point position, Point cellSize, bool absolutePositioning)
+        public static Matrix3x2 ToPositionMatrix(this Point position, Point cellSize, bool absolutePositioning)
         {
-            Point worldLocation;
+            Vector2 worldLocation;
 
             if (absolutePositioning)
-                worldLocation = position;
+                worldLocation = new Vector2(position.X, position.Y);
             else
-                worldLocation = position.ConsoleLocationToPixel(cellSize.X, cellSize.Y);
+            {
+                var point = position.ConsoleLocationToPixel(cellSize.X, cellSize.Y);
+                worldLocation = new Vector2(point.X, point.Y);
+            }
 
-            return Matrix.CreateTranslation(worldLocation.X, worldLocation.Y, 0f);
+            return Matrix3x2.CreateTranslation(worldLocation);
         }
     }
 }

@@ -1,10 +1,7 @@
-﻿#if XNA
-using Microsoft.Xna.Framework;
-#endif
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using SadRogue.Primitives;
 
 namespace SadConsole.Entities
 {

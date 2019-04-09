@@ -1,18 +1,14 @@
-﻿#if XNA
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-#endif
+﻿using Newtonsoft.Json;
+using SadConsole.DrawCalls;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using SadConsole.Components;
+using SadRogue.Primitives;
 
 namespace SadConsole
 {
-    using Newtonsoft.Json;
-    using SadConsole.DrawCalls;
-    using System;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.Collections.Specialized;
-    using SadConsole.Components;
-
     /// <summary>
     /// A <see cref="CellSurface"/> that has a font and can be drawn to the screen.
     /// </summary>
@@ -344,9 +340,9 @@ namespace SadConsole
         public virtual void OnCalculateRenderPosition()
         {
             if (UsePixelPositioning)
-                CalculatedPosition = Position + (Parent?.CalculatedPosition ?? Point.Zero);
+                CalculatedPosition = Position + (Parent?.CalculatedPosition ?? new Point(0, 0));
             else
-                CalculatedPosition = Position.ConsoleLocationToPixel(Font) + (Parent?.CalculatedPosition ?? Point.Zero);
+                CalculatedPosition = Position.ConsoleLocationToPixel(Font) + (Parent?.CalculatedPosition ?? new Point(0, 0));
 
             AbsoluteArea = new Rectangle(CalculatedPosition.X, CalculatedPosition.Y, AbsoluteArea.Width, AbsoluteArea.Height);
 

@@ -1,6 +1,6 @@
-﻿using SadConsole;
+﻿using SadRogue.Primitives;
 
-namespace Microsoft.Xna.Framework.Graphics
+namespace SadConsole
 {
     public static class TextureExtensions
     {

@@ -1,12 +1,8 @@
-﻿#if XNA
-using Microsoft.Xna.Framework;
-#endif
+﻿using System;
+using System.Collections.Generic;
 
 namespace SadConsole
 {
-    using System;
-    using System.Collections.Generic;
-
     /// <summary>
     /// Manages the parent and children relationship for <see cref="Console"/>.
     /// </summary>
@@ -16,6 +12,9 @@ namespace SadConsole
         protected List<Console> screens;
         protected Console owningScreen;
 
+        /// <summary>
+        /// The total amount of items in this collection.
+        /// </summary>
         public int Count => screens.Count;
 
         /// <summary>

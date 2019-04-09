@@ -1,8 +1,4 @@
-﻿#if XNA
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
-#endif
-
+﻿using SadRogue.Primitives;
 using System;
 using System.Collections.Generic;
 
@@ -143,7 +139,7 @@ namespace SadConsole.Input
             MiddleButtonDown = false;
             ScrollWheelValue = 0;
             ScrollWheelValueChange = 0;
-            ScreenPosition = Point.Zero;
+            ScreenPosition = new Point(0, 0);
         }
 
         /// <summary>

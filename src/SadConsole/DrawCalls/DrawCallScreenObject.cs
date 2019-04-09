@@ -1,8 +1,5 @@
-﻿#if XNA
-using Microsoft.Xna.Framework;
-#else
+﻿using SadRogue.Primitives;
 using System.Numerics;
-#endif
 
 namespace SadConsole.DrawCalls
 {

@@ -1,13 +1,9 @@
-﻿#if XNA
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-#endif
+﻿using System;
+using System.Runtime.Serialization;
+using SadRogue.Primitives;
 
 namespace SadConsole
-{
-    using System;
-    using System.Runtime.Serialization;
-    
+{   
     /// <summary>
     /// Decorates a cell with a colored glyph.
     /// </summary>
@@ -35,7 +31,7 @@ namespace SadConsole
         /// Mirror setting of the decorator.
         /// </summary>
         [DataMember]
-        public readonly SpriteEffects Mirror;
+        public readonly CellMirror Mirror;
 
         /// <summary>
         /// Creates a new decorator with the specified colors, glyph, visiblity, and mirror settings.
@@ -43,7 +39,7 @@ namespace SadConsole
         /// <param name="color">Foreground color.</param>
         /// <param name="glyph">Glyph value.</param>
         /// <param name="mirror">Mirror setting.</param>
-        public CellDecorator(Color color, int glyph, SpriteEffects mirror)
+        public CellDecorator(Color color, int glyph, CellMirror mirror)
         {
             Color = color;
             Glyph = glyph;

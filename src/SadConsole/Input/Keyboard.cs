@@ -1,7 +1,4 @@
-﻿#if XNA
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
-#endif
+﻿using SadRogue.Primitives;
 
 namespace SadConsole.Input
 {

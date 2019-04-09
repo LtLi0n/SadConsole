@@ -1,13 +1,9 @@
-﻿#if XNA
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-#endif
+﻿using SadRogue.Primitives;
+using SadConsole.Effects;
+using Newtonsoft.Json;
 
 namespace SadConsole
 {
-    using SadConsole.Effects;
-    using Newtonsoft.Json;
-
     /// <summary>
     /// A <see cref="Console"/> that implements <see cref="IConsoleViewPort"/> to provide a scrolling capability.
     /// </summary>

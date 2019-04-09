@@ -1,8 +1,4 @@
-﻿#if XNA
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-#endif
-
+﻿using SadRogue.Primitives;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
@@ -65,7 +61,7 @@ namespace SadConsole.Renderers
                     if (!cell.IsVisible) continue;
 
                     if (cell.Background != Color.Transparent)
-                        Global.SpriteBatch.Draw(drawingHost.Font.FontImage, drawingHost.RenderRects[i], drawingHost.Font.GlyphRects[drawingHost.Font.SolidGlyphIndex], cell.Background, 0f, Vector2.Zero, SpriteEffects.None, 0.3f);
+                        Global.SpriteBatch.Draw(drawingHost.Font.FontImage, drawingHost.RenderRects[i], drawingHost.Font.GlyphRects[drawingHost.Font.SolidGlyphIndex], cell.Background, 0f, Vector2.Zero, CellMirror.None, 0.3f);
 
                     if (cell.Foreground != Color.Transparent)
                         Global.SpriteBatch.Draw(drawingHost.Font.FontImage, drawingHost.RenderRects[i], drawingHost.Font.GlyphRects[cell.Glyph], cell.Foreground, 0f, Vector2.Zero, cell.Mirror, 0.4f);
@@ -117,7 +113,7 @@ namespace SadConsole.Renderers
         //                            rect = surface.RenderRects[surface.GetIndexFromPoint(point)];
 
         //                            if (cell.Background != Color.Transparent)
-        //                                Global.SpriteBatch.Draw(font.FontImage, rect, font.GlyphRects[font.SolidGlyphIndex], cell.Background, 0f, Vector2.Zero, SpriteEffects.None, 0.23f);
+        //                                Global.SpriteBatch.Draw(font.FontImage, rect, font.GlyphRects[font.SolidGlyphIndex], cell.Background, 0f, Vector2.Zero, CellMirror.None, 0.23f);
 
         //                            if (cell.Foreground != Color.Transparent)
         //                                Global.SpriteBatch.Draw(font.FontImage, rect, font.GlyphRects[cell.Glyph], cell.Foreground, 0f, Vector2.Zero, cell.Mirror, 0.26f);

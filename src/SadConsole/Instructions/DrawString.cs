@@ -1,13 +1,10 @@
-﻿#if XNA
-using Microsoft.Xna.Framework;
-#endif
+﻿using SadRogue.Primitives;
+using System;
+using System.Runtime.Serialization;
+using Console = SadConsole.Console;
 
 namespace SadConsole.Instructions
 {
-    using System;
-    using System.Runtime.Serialization;
-    using Console = SadConsole.Console;
-
     /// <summary>
     /// Draws a string to a console as if someone was typing.
     /// </summary>

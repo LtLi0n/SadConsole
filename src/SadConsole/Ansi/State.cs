@@ -1,6 +1,4 @@
-﻿#if XNA
-using Microsoft.Xna.Framework;
-#endif
+﻿using SadRogue.Primitives;
 
 namespace SadConsole.Ansi
 {
@@ -59,8 +57,8 @@ namespace SadConsole.Ansi
             Bold = false;
             Concealed = false;
             Reverse = false;
-            Foreground = ColorAnsi.White;
-            Background = ColorAnsi.Black;
+            Foreground = Color.AnsiWhite;
+            Background = Color.AnsiBlack;
             AnsiCorrectPrintColor();
         }
     }

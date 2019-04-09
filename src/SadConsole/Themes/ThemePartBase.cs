@@ -1,13 +1,9 @@
-﻿#if XNA
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-#endif
+﻿using SadRogue.Primitives;
+using SadConsole.Controls;
+using System.Runtime.Serialization;
 
 namespace SadConsole.Themes
 {
-    using SadConsole.Controls;
-    using System.Runtime.Serialization;
-
     /// <summary>
     /// Has the basic appearances of each control state.
     /// </summary>
@@ -106,7 +102,7 @@ namespace SadConsole.Themes
         /// Sets the same mirror setting to all theme states.
         /// </summary>
         /// <param name="mirror">The mirror setting.</param>
-        public void SetMirror(SpriteEffects mirror)
+        public void SetMirror(CellMirror mirror)
         {
             Normal.Mirror = mirror;
             Disabled.Mirror = mirror;

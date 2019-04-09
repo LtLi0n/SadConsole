@@ -1,21 +1,16 @@
-﻿#if XNA
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Graphics;
-#endif
+﻿using SadConsole.Effects;
+using System;
+using SadRogue.Primitives;
 
 namespace SadConsole
 {
-    using SadConsole.Effects;
-    using System;
-
     /// <summary>
     /// A cursor that is attached to a <see cref="Console"/> used for printing.
     /// </summary>
     public class Cursor
     {
         private CellSurface editor;
-        private Point position = new Point();
+        private Point position = default;
 
         private int cursorCharacter = 219;
 
@@ -65,14 +60,17 @@ namespace SadConsole
                 if (editor != null)
                 {
                     var old = position;
+                    var x = position.X;
+                    var y = position.Y;
 
-                    if (!(value.X < 0 || value.X >= editor.Width))
-                        position.X = value.X;
+                    if (value.X >= 0 && value.X < editor.Width)
+                        x = value.X;
                     if (!(value.Y < 0 || value.Y >= editor.Height))
-                        position.Y = value.Y;
+                        y = value.Y;
 
-                    if (position != null)
-                        editor.IsDirty = true;
+                    position = new Point(x, y);
+
+                    editor.IsDirty = true;
                 }
             }
         }
@@ -98,7 +96,7 @@ namespace SadConsole
         public int Row
         {
             get => position.Y;
-            set => position.Y = value;
+            set => position = new Point(position.X, value);
         }
 
         /// <summary>
@@ -107,7 +105,7 @@ namespace SadConsole
         public int Column
         {
             get => position.X;
-            set => position.X = value;
+            set => position = new Point(value, position.Y);
         }
 
         /// <summary>
@@ -583,8 +581,8 @@ namespace SadConsole
         /// <inheritdoc />
         public virtual void Render(SpriteBatch batch, Font font, Rectangle renderArea)
         {
-            batch.Draw(font.FontImage, renderArea, font.GlyphRects[font.SolidGlyphIndex], CursorRenderCell.Background, 0f, Vector2.Zero, SpriteEffects.None, 0.6f);
-            batch.Draw(font.FontImage, renderArea, font.GlyphRects[CursorRenderCell.Glyph], CursorRenderCell.Foreground, 0f, Vector2.Zero, SpriteEffects.None, 0.7f);
+            batch.Draw(font.FontImage, renderArea, font.GlyphRects[font.SolidGlyphIndex], CursorRenderCell.Background, 0f, Vector2.Zero, CellMirror.None, 0.6f);
+            batch.Draw(font.FontImage, renderArea, font.GlyphRects[CursorRenderCell.Glyph], CursorRenderCell.Foreground, 0f, Vector2.Zero, CellMirror.None, 0.7f);
         }
 
         internal void Update(TimeSpan elapsed)

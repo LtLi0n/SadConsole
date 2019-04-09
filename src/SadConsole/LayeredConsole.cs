@@ -1,14 +1,11 @@
-﻿#if XNA
-using Microsoft.Xna.Framework;
-#endif
+﻿using SadRogue.Primitives;
+using Newtonsoft.Json;
+using SadConsole.SerializedTypes;
+using System;
+using System.Collections.Generic;
 
 namespace SadConsole
 {
-    using Newtonsoft.Json;
-    using SadConsole.SerializedTypes;
-    using System;
-    using System.Collections.Generic;
-
     public class CellSurfaceLayer : CellSurface
     {
         public CellSurfaceLayer(int width, int height): base(width, height) { }

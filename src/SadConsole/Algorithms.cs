@@ -1,8 +1,5 @@
-﻿#if XNA
-using Microsoft.Xna.Framework;
-#else
+﻿using SadRogue.Primitives;
 using System.Numerics;
-#endif
 
 namespace SadConsole
 {
@@ -123,7 +120,7 @@ namespace SadConsole
         /// <param name="area">The area to calculate.</param>
         /// <param name="gradient">The color gradient to fill with.</param>
         /// <param name="applyAction">The callback called for each part of the area.</param>
-        public static void GradientFill(Point cellSize, Point position, int strength, int angle, Rectangle area, ColorGradient gradient, Action<int, int, Color> applyAction)
+        public static void GradientFill(Point cellSize, Point position, int strength, int angle, Rectangle area, Gradient gradient, Action<int, int, Color> applyAction)
         {
             double radians = angle * Math.PI / 180; // = Math.Atan2(x1 - x2, y1 - y2);
             
@@ -147,9 +144,9 @@ namespace SadConsole
             double start = x1 * angleVector.X + y1 * angleVector.Y;
             double end = x2 * angleVector.X + y2 * angleVector.Y;
 
-            for (int x = area.Left; x < area.Width; x++)
+            for (int x = area.X; x < area.Width; x++)
             {
-                for (int y = area.Top; y < area.Height; y++)
+                for (int y = area.Y; y < area.Height; y++)
                 {
                     // but we need vectors from (-1, -1) to (1, 1)
                     // instead of pixels from (0, 0) to (width, height)

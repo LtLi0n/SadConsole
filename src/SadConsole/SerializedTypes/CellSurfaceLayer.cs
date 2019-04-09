@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SadRogue.Primitives;
+using System;
 using System.Runtime.Serialization;
 using System.Linq;
 using Newtonsoft.Json;
