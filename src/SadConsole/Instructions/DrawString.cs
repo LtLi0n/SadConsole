@@ -2,12 +2,13 @@
 using Microsoft.Xna.Framework;
 #endif
 
+using System;
+using System.Runtime.Serialization;
+
+using Console = SadConsole.Console;
+
 namespace SadConsole.Instructions
 {
-    using System;
-    using System.Runtime.Serialization;
-    using Console = SadConsole.Console;
-
     /// <summary>
     /// Draws a string to a console as if someone was typing.
     /// </summary>
@@ -23,11 +24,6 @@ namespace SadConsole.Instructions
             get => _text;
             set => _text = value ?? throw new Exception($"{nameof(Text)} can't be null.");
         }
-
-        /// <summary>
-        /// Gets or sets the total time to take to write the string. Use zero for instant.
-        /// </summary>
-        public float TotalTimeToPrint { get; set; }
 
         /// <summary>
         /// Gets or sets the position on the console to write the text.
@@ -87,8 +83,7 @@ namespace SadConsole.Instructions
                 _textCopy = Text.ToString();
                 _textIndex = 0;
 
-                if (_target == null)
-                    _target = console;
+                _target ??= console;
 
                 Cursor.AttachSurface(_target);
                 Cursor.DisableWordBreak = true;
@@ -101,40 +96,27 @@ namespace SadConsole.Instructions
                 }
 
                 _tempLocation = Position;
-
-                if (TotalTimeToPrint > 0f)
-                    _timePerCharacter = TotalTimeToPrint / _textCopy.Length;
             }
 
 
-            if (TotalTimeToPrint == 0f)
+            _timeElapsed += Global.GameTimeElapsedUpdate;
+            if (_timeElapsed >= Text[_textIndex].Speed)
             {
-                Cursor.Position = Position;
-                Cursor.Print(Text);
-                IsFinished = true;
-            }
-            else
-            {
-                _timeElapsed += Global.GameTimeElapsedUpdate;
-                if (_timeElapsed >= _timePerCharacter)
+                _timeElapsed = 0d;
+                Cursor.Position = _tempLocation;
+
+                if(_textIndex < Text.Count - 1)
                 {
-                    int charCount = (int)(_timeElapsed / _timePerCharacter);
-                    _timeElapsed = 0d;
-
-                    Cursor.Position = _tempLocation;
-
-                    if (charCount >= _textCopy.Length - _textIndex)
-                    {
-                        charCount = _textCopy.Length - _textIndex;
-                        IsFinished = true;
-                    }
-
-                    var textToPrint = Text.SubString(_textIndex, charCount);
+                    var textToPrint = Text.SubString(_textIndex, 1);
                     Cursor.Print(textToPrint);
-                    _textIndex += (short)charCount;
-
-                    _tempLocation = Cursor.Position;
+                    _textIndex++;
                 }
+                else
+                {
+                    IsFinished = true;
+                }
+
+                _tempLocation = Cursor.Position;
             }
 
             base.Update(console, delta);

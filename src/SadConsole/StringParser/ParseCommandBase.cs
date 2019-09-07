@@ -6,6 +6,10 @@
     public enum CommandTypes
     {
         /// <summary>
+        /// Command should be added to the <see cref="ParseCommandStacks.Speed"/> stack.
+        /// </summary>
+        Speed,
+        /// <summary>
         /// Command should be added to the <see cref="ParseCommandStacks.Foreground"/> stack.
         /// </summary>
         Foreground,

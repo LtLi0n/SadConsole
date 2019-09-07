@@ -9,15 +9,17 @@
     {
         public bool TurnOnEffects;
 
-        public Stack<ParseCommandBase> Foreground;
-        public Stack<ParseCommandBase> Background;
-        public Stack<ParseCommandBase> Glyph;
-        public Stack<ParseCommandBase> Mirror;
-        public Stack<ParseCommandBase> Effect;
-        public Stack<ParseCommandBase> All;
+        public Stack<ParseCommandBase> Speed { get; private set; }
+        public Stack<ParseCommandBase> Foreground { get; private set; }
+        public Stack<ParseCommandBase> Background { get; private set; }
+        public Stack<ParseCommandBase> Glyph { get; private set; }
+        public Stack<ParseCommandBase> Mirror { get; private set; }
+        public Stack<ParseCommandBase> Effect { get; private set; }
+        public Stack<ParseCommandBase> All { get; set; }
 
         public ParseCommandStacks()
         {
+            Speed = new Stack<ParseCommandBase>(4);
             Foreground = new Stack<ParseCommandBase>(4);
             Background = new Stack<ParseCommandBase>(4);
             Glyph = new Stack<ParseCommandBase>(4);
@@ -35,6 +37,10 @@
         {
             switch (command.CommandType)
             {
+                case CommandTypes.Speed:
+                    Speed.Push(command);
+                    //All.Push(command); hide from undo command
+                    break;
                 case CommandTypes.Foreground:
                     Foreground.Push(command);
                     All.Push(command);
@@ -71,6 +77,10 @@
             // Get the stack we need to remove from
             switch (command.CommandType)
             {
+                case CommandTypes.Speed:
+                    if (Speed.Count != 0)
+                        commands = new List<ParseCommandBase>(Speed);
+                    break;
                 case CommandTypes.Foreground:
                     if (Foreground.Count != 0)
                         commands = new List<ParseCommandBase>(Foreground);
@@ -103,6 +113,9 @@
 
                 switch (command.CommandType)
                 {
+                    case CommandTypes.Speed:
+                        Speed = new Stack<ParseCommandBase>(commands);
+                        break;
                     case CommandTypes.Foreground:
                         Foreground = new Stack<ParseCommandBase>(commands);
                         break;
