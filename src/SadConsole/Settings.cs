@@ -1,5 +1,7 @@
 ﻿#if XNA
+using System;
 using Microsoft.Xna.Framework;
+using SadConsole.StringParser;
 #endif
 
 namespace SadConsole
@@ -80,6 +82,10 @@ namespace SadConsole
         /// When set to true, and a font is not specified with the <see cref="Game.Create(string, int, int, Action{Game})"/> overload, the IBM 8x16 extended SadConsole font will be used.
         /// </summary>
         public static bool UseDefaultExtendedFont { get; set; } = false;
+
+        ///<summary>Custom processor called if any built in command is not triggerd. 
+        ///<para>Signature is ("command", "sub command", existing glyphs, text surface, associated editor, command stacks).</para></summary>
+        public static Func<string, string, ColoredGlyph[], CellSurface, ParseCommandStacks, ParseCommandBase> StringParserCustomProcessor { get; set; }
 
         /// <summary>
         /// Toggles between windowed and fullscreen rendering for SadConsole.

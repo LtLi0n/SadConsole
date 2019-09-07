@@ -1543,70 +1543,19 @@
             </summary>
         </member>
         <member name="T:SadConsole.ColoredGlyph">
-            <summary>
-            Represents a single character that has a foreground and background color.
-            </summary>
-        </member>
-        <member name="P:SadConsole.ColoredGlyph.GlyphCharacter">
-            <summary>
-            The glyph.
-            </summary>
-        </member>
-        <member name="F:SadConsole.ColoredGlyph.Effect">
-            <summary>
-            The effect for the glyph.
-            </summary>
-        </member>
-        <member name="M:SadConsole.ColoredGlyph.#ctor">
-            <summary>
-            Creates a new colored glyph with a white foreground, black background, and a glyph index of 0.
-            </summary>
+            <summary>Represents a single character that has a foreground/background colors.</summary>
         </member>
         <member name="M:SadConsole.ColoredGlyph.#ctor(SadConsole.Cell)">
-            <summary>
-            Creates a new colored glyph based on the provided cell.
-            </summary>
-            <param name="cell">The cell.</param>
-        </member>
-        <member name="M:SadConsole.ColoredGlyph.#ctor(System.Int32)">
-            <summary>
-            Creates a new colored glyph with a white foreground and black background.
-            </summary>
-            <param name="glyph">The glyph.</param>
-        </member>
-        <member name="M:SadConsole.ColoredGlyph.#ctor(System.Int32,Microsoft.Xna.Framework.Color,Microsoft.Xna.Framework.Color)">
-            <summary>
-            Creates a new colored glyph with a given foreground and background.
-            </summary>
-            <param name="glyph">The glyph.</param>
-            <param name="background">The color of the foreground.</param>
-            <param name="foreground">The color of the background.</param>
+            <summary>Creates a new colored glyph based on provided cell's foreground, background, glyph and mirror state values.</summary>
         </member>
         <member name="M:SadConsole.ColoredGlyph.Clone">
-            <summary>
-            Creates a new copy of this cell appearance.
-            </summary>
+            <summary>Creates a new copy of this cell appearance.</summary>
             <returns>The cloned cell appearance.</returns>
         </member>
         <member name="T:SadConsole.ColoredString">
             <summary>
             Represents a string that has foreground and background colors for each character in the string.
             </summary>
-        </member>
-        <member name="F:SadConsole.ColoredString.CustomProcessor">
-            <summary>
-            Custom processor called if any built in command is not triggerd. Signature is ("command", "sub command", existing glyphs, text surface, associated editor, command stacks).
-            </summary>
-        </member>
-        <member name="M:SadConsole.ColoredString.Parse(System.String,System.Int32,SadConsole.CellSurface,SadConsole.StringParser.ParseCommandStacks)">
-            <summary>
-            Creates a colored string by parsing commands embedded in the string.
-            </summary>
-            <param name="value">The string to parse.</param>
-            <param name="surfaceIndex">Index of where this string will be printed.</param>
-            <param name="surface">The surface the string will be printed to.</param>
-            <param name="initialBehaviors">Any initial defaults.</param>
-            <returns></returns>
         </member>
         <member name="P:SadConsole.ColoredString.Item(System.Int32)">
             <summary>
@@ -1689,12 +1638,6 @@
             </summary>
             <param name="glyphs">The glyphs to combine.</param>
         </member>
-        <member name="M:SadConsole.ColoredString.Clone">
-            <summary>
-            Returns a new <see cref="T:SadConsole.ColoredString"/> object by cloning this instance.
-            </summary>
-            <returns>A new <see cref="T:SadConsole.ColoredString"/> object.</returns>
-        </member>
         <member name="M:SadConsole.ColoredString.SubString(System.Int32)">
             <summary>
             Returns a new <see cref="T:SadConsole.ColoredString"/> object using a substring of this instance from the index to the end.
@@ -1769,6 +1712,13 @@
             <param name="string1">The string.</param>
             <param name="string2">The colored string.</param>
             <returns>A new colored string instance.</returns>
+        </member>
+        <member name="M:SadConsole.ColoredString.Parse(System.String,System.Int32,SadConsole.CellSurface,SadConsole.StringParser.ParseCommandStacks)">
+            <summary>Creates a colored string by parsing commands embedded in the string.</summary>
+            <param name="value">The string to parse.</param>
+            <param name="surfaceIndex">Index of where this string will be printed.</param>
+            <param name="surface">The surface the string will be printed to.</param>
+            <param name="initialBehaviors">Any initial defaults.</param>
         </member>
         <member name="T:SadConsole.Components.EntityViewSyncComponent">
             <summary>
@@ -5677,11 +5627,6 @@
             Gets or sets the text to print.
             </summary>
         </member>
-        <member name="P:SadConsole.Instructions.DrawString.TotalTimeToPrint">
-            <summary>
-            Gets or sets the total time to take to write the string. Use zero for instant.
-            </summary>
-        </member>
         <member name="P:SadConsole.Instructions.DrawString.Position">
             <summary>
             Gets or sets the position on the console to write the text.
@@ -6546,8 +6491,12 @@
         </member>
         <member name="P:SadConsole.Settings.UseDefaultExtendedFont">
             <summary>
-            When set to true, and a font is not specified with the <see cref="!:Game.Create(string, int, int, Action&lt;Game&gt;)"/> overload, the IBM 8x16 extended SadConsole font will be used.
+            When set to true, and a font is not specified with the <see cref="M:SadConsole.Game.Create(System.String,System.Int32,System.Int32,System.Action{SadConsole.Game})"/> overload, the IBM 8x16 extended SadConsole font will be used.
             </summary>
+        </member>
+        <member name="P:SadConsole.Settings.StringParserCustomProcessor">
+            <summary>Custom processor called if any built in command is not triggerd. 
+            <para>Signature is ("command", "sub command", existing glyphs, text surface, associated editor, command stacks).</para></summary>
         </member>
         <member name="M:SadConsole.Settings.ToggleFullScreen">
             <summary>
@@ -6616,29 +6565,34 @@
             Command type of a <see cref="T:SadConsole.StringParser.ParseCommandBase"/>.
             </summary>
         </member>
+        <member name="F:SadConsole.StringParser.CommandTypes.Speed">
+            <summary>
+            Command should be added to the <see cref="P:SadConsole.StringParser.ParseCommandStacks.Speed"/> stack.
+            </summary>
+        </member>
         <member name="F:SadConsole.StringParser.CommandTypes.Foreground">
             <summary>
-            Command should be added to the <see cref="F:SadConsole.StringParser.ParseCommandStacks.Foreground"/> stack.
+            Command should be added to the <see cref="P:SadConsole.StringParser.ParseCommandStacks.Foreground"/> stack.
             </summary>
         </member>
         <member name="F:SadConsole.StringParser.CommandTypes.Background">
             <summary>
-            Command should be added to the <see cref="F:SadConsole.StringParser.ParseCommandStacks.Background"/> stack.
+            Command should be added to the <see cref="P:SadConsole.StringParser.ParseCommandStacks.Background"/> stack.
             </summary>
         </member>
         <member name="F:SadConsole.StringParser.CommandTypes.Glyph">
             <summary>
-            Command should be added to the <see cref="F:SadConsole.StringParser.ParseCommandStacks.Glyph"/> stack.
+            Command should be added to the <see cref="P:SadConsole.StringParser.ParseCommandStacks.Glyph"/> stack.
             </summary>
         </member>
         <member name="F:SadConsole.StringParser.CommandTypes.Mirror">
             <summary>
-            Command should be added to the <see cref="F:SadConsole.StringParser.ParseCommandStacks.Mirror"/> stack.
+            Command should be added to the <see cref="P:SadConsole.StringParser.ParseCommandStacks.Mirror"/> stack.
             </summary>
         </member>
         <member name="F:SadConsole.StringParser.CommandTypes.Effect">
             <summary>
-            Command should be added to the <see cref="F:SadConsole.StringParser.ParseCommandStacks.Effect"/> stack.
+            Command should be added to the <see cref="P:SadConsole.StringParser.ParseCommandStacks.Effect"/> stack.
             </summary>
         </member>
         <member name="F:SadConsole.StringParser.CommandTypes.PureCommand">
@@ -6695,7 +6649,7 @@
         </member>
         <member name="T:SadConsole.StringParser.ParseCommandRecolor">
             <summary>
-            Recolors a glyph.
+            Recolors a glyph. Yikes
             </summary>
         </member>
         <member name="T:SadConsole.StringParser.ParseCommandStacks">
@@ -6705,14 +6659,14 @@
         </member>
         <member name="M:SadConsole.StringParser.ParseCommandStacks.AddSafe(SadConsole.StringParser.ParseCommandBase)">
             <summary>
-            Adds a behavior to the <see cref="F:SadConsole.StringParser.ParseCommandStacks.All"/> collection and the collection 
+            Adds a behavior to the <see cref="P:SadConsole.StringParser.ParseCommandStacks.All"/> collection and the collection 
             based on the <see cref="F:SadConsole.StringParser.ParseCommandBase.CommandType"/> type.
             </summary>
             <param name="command"></param>
         </member>
         <member name="M:SadConsole.StringParser.ParseCommandStacks.RemoveSafe(SadConsole.StringParser.ParseCommandBase)">
             <summary>
-            Removes a command from the appropriate command stack and from the <see cref="F:SadConsole.StringParser.ParseCommandStacks.All"/> stack.
+            Removes a command from the appropriate command stack and from the <see cref="P:SadConsole.StringParser.ParseCommandStacks.All"/> stack.
             </summary>
             <param name="command">The command to remove</param>
         </member>
@@ -7712,7 +7666,7 @@
             Various extension methods to <see cref="T:Microsoft.Xna.Framework.Color"/> class.
             </summary>
         </member>
-        <member name="F:Microsoft.Xna.Framework.ColorExtensions.ColorMappings">
+        <member name="P:Microsoft.Xna.Framework.ColorExtensions.ColorMappings">
             <summary>
             Custom color mappings for the <see cref="M:Microsoft.Xna.Framework.ColorExtensions.FromParser(Microsoft.Xna.Framework.Color,System.String,System.Boolean@,System.Boolean@,System.Boolean@,System.Boolean@,System.Boolean@)"/> method.
             </summary>
